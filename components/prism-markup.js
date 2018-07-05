@@ -10,8 +10,9 @@ Prism.languages.markup = {
 			'tag': {
 				pattern: /^<\/?[^\s>\/]+/i,
 				inside: {
+                    'tag-punctuation':/[<>]/,
 					'punctuation': /^<\/?/,
-					'namespace': /^[^\s>\/:]+:/
+					'namespace': /^[^\s>\/:]+:/,
 				}
 			},
 			'attr-value': {
@@ -26,7 +27,7 @@ Prism.languages.markup = {
 					]
 				}
 			},
-			'punctuation': /\/?>/,
+			'tag-punctuation': /\/?>/,
 			'attr-name': {
 				pattern: /[^\s>\/]+/,
 				inside: {
@@ -38,19 +39,3 @@ Prism.languages.markup = {
 	},
 	'entity': /&#?[\da-z]{1,8};/i
 };
-
-Prism.languages.markup['tag'].inside['attr-value'].inside['entity'] =
-	Prism.languages.markup['entity'];
-
-// Plugin to make entity title show the real entity, idea by Roman Komarov
-Prism.hooks.add('wrap', function(env) {
-
-	if (env.type === 'entity') {
-		env.attributes['title'] = env.content.replace(/&amp;/, '&');
-	}
-});
-
-Prism.languages.xml = Prism.languages.markup;
-Prism.languages.html = Prism.languages.markup;
-Prism.languages.mathml = Prism.languages.markup;
-Prism.languages.svg = Prism.languages.markup;

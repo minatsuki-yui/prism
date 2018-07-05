@@ -1,4 +1,11 @@
 Prism.languages.python = {
+	'predefine':{
+	pattern: /__(.+?)__/,
+        greedy: false
+	},
+	'self': {
+        pattern: /self/,
+	},
 	'comment': {
 		pattern: /(^|[^\\])#.*/,
 		lookbehind: true
